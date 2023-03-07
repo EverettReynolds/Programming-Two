@@ -1,0 +1,17 @@
+Everett Reynolds
+
+Planning the Library Catalog Class
+
+This was our second project for CSC 205, and dare I say it was a doozy. You need to take into account what we are given at the beginning of our project. We were given an example Scanner class to help our project run more smoothly. We were given a LibraryBook object which have a string title, an author's first and last name as a string object, a copyright year int, a price double, and an enmurated String genre. This means we have a LibraryBook object beforehand. 
+
+In this project, the goal is to create a nice looking Library Catalog system which allows users to view the contents of a Library and scan for certain titles and see if they are present within The Library.
+
+This will require doing a few things.
+The first would be needing to deduce an ArrayList of LibraryBook Objects. Since we already have a LibraryBook class created, that should be easy.
+The second thing would be to input a .dat data file called library.dat into our program and insert each LibraryBook from the file into our ArrayList.
+The Third Thing would be to sort this ArrayList into alphabetical order by LibraryBook title attribute using a selection sort algorithm. This would require sorting LibraryBook objects, and their string attributes held within. We would need to remember the three line swap requirement to get this to properly work.
+The Fourth thing would be to create methods to clear the screen and allow us to view the files in our directory in order to reduce clutter and enhance user experience.
+The fifth thing would be to create a menu to facilitate the next portion of the user experience, as the file finding and library catalog experience are intended to be seperate from one another.
+The Sixth thing would be to create a way for the user to stay in that menu until all of their requests are handled, and create a way for them to end their experience at their leisure. We need to remember to use exception handling here.
+The Seventh thing would be to create a search method for the user to find book titles using a binary search since we have at this point already sorted the ArrayList before.
+The Eighth thing would be us needing to create a way for user's to view all of the contents of our ArrayList, so they are able to see the contents of the library. This would be preferable to have as one at a time to reduce clutter and enhance user experience.

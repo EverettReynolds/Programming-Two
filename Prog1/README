@@ -1,0 +1,29 @@
+Everett Reynolds
+
+Planning The Bingo Game Class
+
+In order to break down the methodology of the task at hand, we first need to understand said problem.
+We are being asked to play a game of bingo.
+This requires creating a bingo card using a 2D array, filling up this Bingo Card with values from an outside file, and printing out this card for our user to view.
+The 2D array denotes a creation statement.
+The Filling of the Bingo Card means we need to use our 2D array and a File Class in order to put our integer values into our 2D int Array.
+The viewing of this card by the user requires the use of a nested for loop to go through the array and print out it's initial values
+Playing the actual game will require many different tasks.
+The first will be the generation of the random bingo ball int that will be compared against our bingo card.
+The use of the Math.random function between the numbers 1-75 is where we need to look. 
+We do not want duplicate numbers, however.
+In order to ensure there are no duplicates, we will use a boolean array aptly named a BitSet.
+Bitsets are set to false by default, so when a random number is chosen by our Math.random function, we will set the position of the Bitset equal to the int to true, so that when a true is read from the Bitset, we will regenerate the number until we get a number that has not been generated before.
+Playing the game also requires checking for win, and we will seperate this into two methods.
+The first part is the easy part, which is the cross out method.
+This method takes input from the randomNumGen method, and sets the numbers in the bingo card equal to 0 if they were generated with the randomNumGen method.
+The next part is the tricky part, which is the checking for a win method. 
+Essentially , you need to check for four possible win types, horizontal wins, vertical wins, right diagonal wins, and left diagonal wins.
+Diagonal wins are calculated the same way, so they can be counted as the same kind of win.
+We will check for these wins by using global constants that denote the fives of the bingo card, but it would also work if we went through the rows and columns of the actual bingo card, if they varied in size.
+We go through the board vertically by going through it's rows in the first for loop, and then going through it's columns in the second, checking for a 0 sum with an if statement inside of the first for loop.
+we go through the board horizontally by going through it's columns in the first for loop, and then we go through it's rows in the second, checking for a 0 sum with an if statement inside of the first for loop. 
+We go through the board diagonally in two different ways, both starting from the top left and the top right.
+Both ways, we would need to have the if statement checking for the sum = 0 outside of the for loop, since we only have one this time.
+After a win is calulated, we send back a return of one of our constant global variables to the play game method, where that return kicks it out of the while statement.
+This allows for the value of one of the global variables to come to light and return a statement and count based on the win type.

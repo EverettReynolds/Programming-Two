@@ -1,0 +1,310 @@
+Script started on Fri 07 Feb 2020 11:09:56 PM EST
+]0;reynolds@cobra:~/Prog1[?1034h[reynolds@cobra Prog1]$ cat Bingo.java
+//Everett Reynolds
+//02-02-20
+import java.util.*;
+import java.io.*;
+
+public class Bingo {
+final static int ROWS = 5; // A bingo card is 5x5 therefore the row and column numbers will be 5 by 5
+final static int COLS = 5;
+public static final int HORIZONTAL = 1; // Constants set up to ensure proper Bingo Win Function
+public static final int VERTICAL = 2;
+public static final int DIAGONAL = 3;
+public static ArrayList <Integer> bingoBank = new ArrayList <Integer>(25);
+public static BitSet bingoNums = new BitSet(76);
+	public static void main(String[] args) throws IOException // filled with method calls for the facilitating the entire program
+  {
+   int[][] bingoCard = new int[ROWS][COLS];
+  
+   fillCard(bingoCard);
+   playGame(bingoCard);
+  }
+
+public static void fillCard(int[][] bingoCard ) throws IOException // fills up our bingo card with number from an outside file "bingo.in"
+{
+  File inFile = new File ("bingo.in");
+  Scanner input = new Scanner(inFile);
+  int tempInt = 0 ;
+  int rowTemp = 0 ;
+  for(int i = 0; i< bingoCard.length;i++)
+  {  
+    for(int j = 0; j < bingoCard[0].length; j++)
+    {
+      tempInt = input.nextInt();
+        bingoCard[i][j] = tempInt;
+    }
+  
+  }
+  
+}
+
+public static void printCard ( int[][]bingoCard ) // Prints out our Bingo Card 
+{
+  for( int i = 0; i < bingoCard.length; i++ )
+  {
+    for ( int j = 0; j < bingoCard[0].length; j++)
+    {
+      System.out.print("|" +  bingoCard[i][j] + "|" + "\t" );
+    }
+    System.out.println();
+  }
+}
+
+public static int randomNumGen() // Generates a random number simulating a bingo ball machine, not reusing the same number
+{
+  int bingoBall = 0;
+  do // the do method ensures a number is generated before a condition is checked
+  {
+    bingoBall = (int) Math.round((Math.random() * 74 + 1));
+  } while ( bingoNums.get(bingoBall) == true );
+  bingoBank.add(bingoBall);
+  bingoNums.set(bingoBall);
+  return bingoBall;
+  
+}
+
+public static void playGame ( int[][]bingoCard ) // The actual game method which facilitates proper gameplay
+{
+  int counter = 0;
+  printCard(bingoCard);
+  int winNumber = 0;
+  while( checkForWin(bingoCard) == 0 ) // looks for checkForWin to return one of our constant global variables mentioned above
+  {
+    counter++;
+    crossOff(bingoCard);
+    winNumber = checkForWin(bingoCard);
+  }
+  if ( winNumber == 1)
+  {
+    System.out.println("You Win With A Horizontal Bingo After " + counter + " Picks!");
+  }
+  if ( winNumber == 2)
+  {
+    System.out.println("You Win With A Vertical Bingo After " + counter + " Picks!");
+  }
+  if ( winNumber == 3)
+  {
+    System.out.println("You Win With A Diagonal Bingo After " + counter + " Picks!");
+  }
+  reprintCard(bingoCard);
+  
+}
+
+public static void crossOff ( int[][]bingoCard) // helps to figure out the zero sum for check for win
+{
+  int ball = randomNumGen();
+  for(int i = 0; i < bingoCard.length; i++)
+  {
+    for( int j = 0 ; j < bingoCard[0].length; j++ )
+    {
+      if ( bingoCard[i][j] == ball )
+      {
+      bingoCard[i][j] = 0;
+      }
+    }
+  }
+}
+
+public static int checkForWin ( int[][]bingoCard ) // uses sum addition methods to check for a horizontal, vertical, or diagonal win IE add all rows, add all columns, add both diagonals
+{
+      int rowCrossed = 0;
+      int sum = 0;
+      for (int i = 0; i < ROWS; i++ ) // Row Sum Finder
+      {
+        sum = 0;
+        for(int j = 0; j < COLS; j++)
+        
+        sum+=bingoCard[i][j];
+        
+        if(sum == 0)
+           return HORIZONTAL;
+      }
+
+        
+                
+       for ( int j = 0; j < COLS; j++ ) // Column Sum Finder
+      {
+       sum = 0;
+       for ( int i = 0; i < ROWS; i++ )
+         sum+=bingoCard[i][j];
+         if(sum == 0)
+           return VERTICAL;
+      }  
+       
+      
+
+     sum = 0; 
+     for ( int i = 0; i < ROWS; i++ ) // Left Diagonal Sum Finder
+     {
+       sum+=bingoCard[i][i];
+         
+     }
+     if(sum == 0)
+           return DIAGONAL;
+           
+     sum = 0;
+     for ( int i = 0; i < ROWS; i++ ) // Right Diagonal Sum Finder
+     {
+       sum+=bingoCard[i][ROWS-i-1];
+     } 
+     if(sum == 0)
+         return DIAGONAL;
+   return rowCrossed;   
+}
+
+public static void reprintCard (int[][]bingoCard ) // a method to reprint our bingo card after the zero sums are found
+{
+  for(int i = 0; i < bingoBank.size(); i++)
+  {
+    System.out.println(bingoBank.get(i));
+    if(i%9 == 0 )
+    {
+      System.out.println(" ");
+    }
+  }
+  for( int i = 0; i < bingoCard.length; i++ )
+  {
+    for ( int j = 0; j < bingoCard[0].length; j++)
+    {
+      if(bingoCard[i][j] == 0 )
+      {
+        System.out.print("|" +  "X" + "|" + "\t" );
+      }
+      else
+      {
+        System.out.print("|" +  bingoCard[i][j] + "|" + "\t" );
+      }
+    }
+    System.out.println();
+  }
+    
+}
+
+}
+
+]0;reynolds@cobra:~/Prog1[reynolds@cobra Prog1]$ cat Bingo.java[Kscriptjava Bingoc Bingo.java
+]0;reynolds@cobra:~/Prog1[reynolds@cobra Prog1]$ javac Bingo.java[2Pcat[C[C[C[C[C[C[C[C[C[C[C[Kscriptjava Bingo
+|12|	|28|	|31|	|49|	|66|	
+|3|	|26|	|45|	|53|	|75|	
+|10|	|17|	|33|	|59|	|67|	
+|7|	|19|	|42|	|55|	|74|	
+|2|	|23|	|37|	|46|	|70|	
+You Win With A Horizontal Bingo After 38 Picks!
+21
+ 
+10
+60
+64
+51
+11
+45
+41
+12
+14
+ 
+48
+5
+37
+23
+13
+38
+63
+24
+6
+ 
+18
+28
+74
+39
+8
+29
+49
+50
+15
+ 
+55
+7
+57
+33
+61
+66
+27
+69
+20
+ 
+31
+|X|	|X|	|X|	|X|	|X|	
+|3|	|26|	|X|	|53|	|75|	
+|X|	|17|	|X|	|59|	|67|	
+|X|	|19|	|42|	|X|	|X|	
+|2|	|X|	|X|	|46|	|70|	
+]0;reynolds@cobra:~/Prog1[reynolds@cobra Prog1]$ java Bingoc Bingo.java[6P Bingo
+|12|	|28|	|31|	|49|	|66|	
+|3|	|26|	|45|	|53|	|75|	
+|10|	|17|	|33|	|59|	|67|	
+|7|	|19|	|42|	|55|	|74|	
+|2|	|23|	|37|	|46|	|70|	
+You Win With A Diagonal Bingo After 47 Picks!
+53
+ 
+61
+31
+68
+25
+18
+17
+40
+65
+22
+ 
+48
+39
+73
+63
+50
+33
+37
+71
+44
+ 
+66
+26
+60
+30
+57
+24
+29
+10
+21
+ 
+52
+64
+9
+32
+72
+51
+14
+45
+58
+ 
+16
+2
+12
+59
+27
+43
+6
+36
+75
+ 
+19
+|X|	|28|	|X|	|49|	|X|	
+|3|	|X|	|X|	|X|	|X|	
+|X|	|X|	|X|	|X|	|67|	
+|7|	|X|	|42|	|55|	|74|	
+|X|	|23|	|X|	|46|	|70|	
+]0;reynolds@cobra:~/Prog1[reynolds@cobra Prog1]$ exit
+exit
+
+Script done on Fri 07 Feb 2020 11:10:51 PM EST
