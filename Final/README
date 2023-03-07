@@ -1,0 +1,29 @@
+The class we are working with is the Queue class.
+Within this class, there are many methods which we have access to.
+The methods isEmpty, enqueue, dequeue, dequeueAll, peek, front, and clone are all accessable through the Queue class.
+The Queue class uses a circular linked list data structure in order to make all of this work.
+This list works by having it's last node point to it's first node, creating a circle of nodes which all point to each other in a ring
+It's different from a regular linked list as there are no null elements being pointed to at it's end.
+This is good for us as it means any portion of the Queue can be a starting point for us, as we are using a circular linked list as the basis for all of our Job object queues.
+Outside of the Queue class, I have a driver class which will contain three seperate method from the main.
+These will be the input method, process method, and output method.
+The input method will take in our data from text files using only commandline arguments and will place the given information of jobname , start time, and runtime into a Job Object Queue called input which will be used at the start of our process queue.
+our process queue will actually process all the events occuring within our data, running through the input queue, placing Job objects into an process Queue, carrying out their jobs as soon as their given time is availiable , and then removing them from the process Queue when their job has been carried out, and putting them into a output Queue.
+The output method will simply take our output from our process and print it in a report like style with information collected during the process displayed in a toString table, as well as, additional calculated data being displayed at the bottom. 
+Here is an example of what the input data would look like.
+job1  01 05
+job2  03 04
+job3  06 08
+job4  09 02
+job5  11 04
+The average wait time from this data would be calculated from taking the time between when a job is allowed into the process queue and when it is actually started to be worked on and subtracting the latter from the former to find the wait time on a job basis. The data would then be collected and compiled in an average variable and then divided by the total number of jobs at the end of the process.
+job1 = 0
+job2 = 2
+job3 = 3
+job4 = 8
+job5 = 8 
+and divide by the total number of jobs (5 in this case)
+The CPU usage time would be calculated by adding a counter to the time when the process queue is not empty
+The idle time would be calculated by adding a counter to the time when the process queue is empty and the first queue is not.
+The CPU usage is calculated after we know both the usage and idle time.
+You calculate the CPU usage in a percent by taking the CPU usage time and dividing it by the CPU usage plus the CPU idle time. (usage / (usage+idle))

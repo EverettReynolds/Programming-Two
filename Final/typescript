@@ -1,0 +1,23 @@
+Script started on Sat 02 May 2020 08:40:51 PM EDT
+]0;reynolds@cobra:~/Final[?1034h[reynolds@cobra Final]$ exitjavac TimeShare.javaclear[Kjavac TimeShare.java
+]0;reynolds@cobra:~/Final[reynolds@cobra Final]$ javac TimeShare.javaexit[Kjavac TimeShare.javaclear[K[Kjavac TimeShare.java TimeShare jobs1.dat
+Job Control Analysis: Summary Report
+------------------------------------
+
+job id arrival start   run     wait   turnaround
+       time    time    time    time   time
+------ ------- -----   ----    ----   ----------
+job1	1	1	3	0	3
+job2	2	4	2	2	4
+job3	10	10	5	0	5
+
+
+Average Wait Time => .67
+        CPU Usage => 10.0
+        CPU Idle  => 4.0
+    CPU Usage (%) => 71.43 %
+-----------------------------------------------------
+]0;reynolds@cobra:~/Final[reynolds@cobra Final]$ exit
+exit
+
+Script done on Sat 02 May 2020 08:41:33 PM EDT
